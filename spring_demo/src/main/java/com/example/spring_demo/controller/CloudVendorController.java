@@ -17,15 +17,14 @@ import com.example.spring_demo.model.CloudVendor;
 import com.example.spring_demo.response.ResponseHandler;
 import com.example.spring_demo.service.CloudVendorService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/cloudvendor")
 public class CloudVendorController
 {
-    CloudVendorService cloudVendorService;
-
-    public CloudVendorController(CloudVendorService cloudVendorService) {
-        this.cloudVendorService = cloudVendorService;
-    }
+    private final CloudVendorService cloudVendorService;
 
     // Read Specific Cloud Vendor Details from DB
     @GetMapping("/{vendorId}")

@@ -2,6 +2,7 @@ package com.example.spring_demo.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.spring_demo.exception.CloudVendorNotFoundException;
@@ -9,14 +10,14 @@ import com.example.spring_demo.model.CloudVendor;
 import com.example.spring_demo.repository.CloudVendorRepository;
 import com.example.spring_demo.service.CloudVendorService;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class CloudVendorServiceImpl implements CloudVendorService {
 
-    CloudVendorRepository cloudVendorRepository;
-
-    public CloudVendorServiceImpl(CloudVendorRepository cloudVendorRepository) {
-        this.cloudVendorRepository = cloudVendorRepository;
-    }
+    @Autowired
+    private final CloudVendorRepository cloudVendorRepository;
 
     @Override
     public String createCloudVendor(CloudVendor cloudVendor) {
