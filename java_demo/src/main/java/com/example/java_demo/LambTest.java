@@ -35,7 +35,7 @@ public class LambTest {
 	}
 
 	public static void callingMethod() {
-		FuncInter1 add = (int x, int y) -> x + y;
+		FuncInter1 add = Integer::sum;
 		FuncInter1 multiply = (int x, int y) -> x * y;
 		LambTest tobj = new LambTest();
 	}

@@ -9,7 +9,7 @@ import java.io.IOException;
 public class FileManager {
 
 
-    public static String ReadFileContent(String filePath) {
+    public static String readFileContent(String filePath) {
         BufferedReader br = null;
         String data = null;
 
@@ -32,7 +32,7 @@ public class FileManager {
         }
         return data;
     }
-    public static void CreateNewFile() {
+    public static void createNewFile() {
 
         // create a file object for the current location
         File file = new File("newFile.txt");
@@ -53,7 +53,7 @@ public class FileManager {
         }
     }
 
-    public static void WriteToFile(String data) {
+    public static void writeToFile(String data) {
         try {
             // Creates a Writer using FileWriter
             FileWriter output = new FileWriter("output.txt");
@@ -70,7 +70,7 @@ public class FileManager {
         }
     }
 
-    public static void WriteToFileCheck(String data) {
+    public static void writeToFileCheck(String data) {
         File file = new File("output.txt");
         if(file.exists()){
             System.out.println("File exists");
