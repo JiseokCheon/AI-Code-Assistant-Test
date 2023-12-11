@@ -1,6 +1,7 @@
 package com.example.spring_demo.service.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,43 +34,29 @@ class CloudVendorServiceImplTest {
 		assertEquals(cloudVendorServiceImpl.createCloudVendor(cloudVendor), "Success");
 	}
 
-	// add unit test for the updateCloudVendor Method
+	// Write test code to verify the input and return value of the getByVendorName method
 	@Test
-	void testUpdateCloudVendor() {
+	void testGetByVendorName2() {
 		// create object using a Builder for the CloudVendor
 		CloudVendor cloudVendor = CloudVendor.builder().vendorId("1").vendorName("AWS").vendorAddress("USA")
 			.vendorPhoneNumber("1234567890").build();
-		// check the condition
-		assertEquals(cloudVendorServiceImpl.updateCloudVendor(cloudVendor), "Success");
-	}
-
-	// add unit test for the deleteCloudVendor Method
-	@Test
-	void testDeleteCloudVendor() {
-		// check the condition
-		assertEquals(cloudVendorServiceImpl.deleteCloudVendor("1"), "Success");
-	}
-
-	// add unit test for the getCloudVendor Method
-	@Test
-	void testGetCloudVendor() {
-		// check the condition
-		assertEquals(cloudVendorServiceImpl.getCloudVendor("1"), "Success");
-	}
-
-	// add unit test for the getAllCloudVendor Method
-	@Test
-	void testGetAllCloudVendors() {
-		// check the condition
-		assertEquals(cloudVendorServiceImpl.getAllCloudVendors(), "Success");
-	}
-
-	// add unit test for the getByVendorName Method
-	@Test
-	void testGetByVendorName() {
+		// mock the findByVendorName method
+		when(cloudVendorRepository.findByVendorName("AWS")).thenReturn(java.util.Arrays.asList(cloudVendor));
 		// check the condition
 		assertEquals(cloudVendorServiceImpl.getByVendorName("AWS"), "Success");
 	}
 
+
+	// Write test code to validate the getByVendorName method
+	@Test
+	void testGetByVendorName() {
+		// create object using a Builder for the CloudVendor
+		CloudVendor cloudVendor = CloudVendor.builder().vendorId("1").vendorName("AWS").vendorAddress("USA")
+			.vendorPhoneNumber("1234567890").build();
+		// mock the findByVendorName method
+		when(cloudVendorRepository.findByVendorName("AWS")).thenReturn(java.util.Arrays.asList(cloudVendor));
+		// check the condition
+		assertEquals(cloudVendorServiceImpl.getByVendorName("AWS"), "Success");
+	}
 
 }

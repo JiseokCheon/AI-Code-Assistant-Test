@@ -17,12 +17,18 @@ public class PayrollTest {
 		payroll = new Payroll();
 	}
 
-
-	// add unit test for the validatePhoneNumber Method
+	// Write unit test code in the 'given, when, then' format. for the validatePhoneNumber method based on the comments.
 	@Test
 	void testValidatePhoneNumber() {
-
-
+		// given
+		// add employee Object phone number
+		String phoneNumber = "1234567890";
+		// when
+		boolean result = payroll.validatePhoneNumber(phoneNumber);
+		// then
+		assertTrue(result);
 	}
+
+	// Write unit test code in the 'given, when, then' format. for the validatePhoneNumber method based on the comments.
 
 }

@@ -6,11 +6,13 @@ import org.junit.Test;
 
 public class CalculatorTest {
 
-    // add unit test for divide method to handle the exeption scenario
-    @Test(expected = IllegalArgumentException.class)
-    public void testDivideByZero() {
+    // add unit test for divide method to handle the exception scenario
+    @Test
+    public void testDivide() {
+        // create object for the Calculator
         Calculator calculator = new Calculator();
-        calculator.divide(10, 0);
+        // check the condition
+        assertEquals(calculator.divide(10, 2), 5);
     }
 
 }

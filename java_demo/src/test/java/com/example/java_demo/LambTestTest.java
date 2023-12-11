@@ -10,8 +10,8 @@ public class LambTestTest {
 	// add unit test for the getElement Method
 	@Test
 	void testGetElement() {
-		// add mock data
-		String[] str = {"Hello", "World"};
+
+
 		// check the condition
 		assertEquals(LambTest.getElement(str, 1), "World");
 
