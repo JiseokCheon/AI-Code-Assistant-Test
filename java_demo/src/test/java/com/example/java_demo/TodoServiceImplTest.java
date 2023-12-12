@@ -18,20 +18,24 @@ public class TodoServiceImplTest {
 	@Mock
 	TodoService todoServiceMock;
 
-
 	@InjectMocks
 	TodoServiceImpl todoServiceImpl;
 
-	// create method annotated with @Before
 	@BeforeEach
 	public void init() {
-		// create object for the TodoServiceImpl class
 		todoServiceImpl = new TodoServiceImpl(todoServiceMock);
 	}
 
-	// add unit test for the retrieveTodosRelatedToJava method
 	@Test
 	public void testRetrieveTodosRelatedToJava() {
+		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Java", "Learn to Dance");
+		when(todoServiceMock.retrieveTodos("Dummy")).thenReturn(todos);
+		List<String> filteredTodos = todoServiceImpl.retrieveTodosRelatedToJava("Dummy");
+		assertEquals(1, filteredTodos.size());
+	}
+
+	@Test
+	public void testRetrieveTodosRelatedToJava_WhenTodosContainJava_ThenReturnFilteredTodosList() {
 		// create a list of strings
 		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Java", "Learn to Dance");
 		// when the retrieveTodos method is called, return the list of strings

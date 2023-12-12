@@ -9,6 +9,12 @@ import java.io.IOException;
 public class FileManager {
 
 
+    /**
+     * Reads the content of a file.
+     *
+     * @param filePath the path of the file to read
+     * @return the content of the file as a String, or an error message if an IOException occurs
+     */
     public static String ReadFileContent(String filePath) {
         BufferedReader br = null;
         String data = null;
