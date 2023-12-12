@@ -20,7 +20,7 @@ public class TodoServiceImpl {
         this.todoService = todoService;
     }
 
-  
+
     /**
      * Retrieves a list of todos related to Java for the given user.
      *
@@ -40,4 +40,5 @@ public class TodoServiceImpl {
 
         return filteredTodos;
     }
+
 }
