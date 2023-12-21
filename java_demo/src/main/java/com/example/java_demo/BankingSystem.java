@@ -9,10 +9,10 @@ public class BankingSystem {
 	private static Map<String, Account> accounts = new HashMap<>();
 
 	public String createAccount(String accountHolderName) {
-		String accountNumber = generateAccountNumber();
+		// String accountNumber = generateAccountNumber();
 		Account account = new Account();
-		accounts.put(accountNumber, account);
-		return accountNumber;
+		accounts.put(accountHolderName, account);
+		return accountHolderName;
 	}
 
 	public double deposit(String accountNumber, double amount) {
