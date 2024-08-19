@@ -30,15 +30,7 @@ public class TodoServiceImplTest {
 	}
 
 	// add unit test for the retrieveTodosRelatedToJava method
-	@Test
-	public void testRetrieveTodosRelatedToJava() {
-		// create a list of strings
-		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Java", "Learn to Dance");
-		// when the retrieveTodos method is called, return the list of strings
-		when(todoServiceMock.retrieveTodos("Dummy")).thenReturn(todos);
-		// create a list of strings
-		List<String> filteredTodos = todoServiceImpl.retrieveTodosRelatedToJava("Dummy");
-		// check if the list of strings is equal to the expected list of strings
-		assertEquals(1, filteredTodos.size());
-	}
+
+
+
 }

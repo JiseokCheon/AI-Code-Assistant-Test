@@ -1,38 +1,48 @@
 package com.example.java_demo;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-class BankingSystemTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-	// create object for the BankingSystem class
-	BankingSystem bankingSystem;
-
-	@BeforeEach
-	void setUp() throws Exception {
-		bankingSystem = new BankingSystem();
-	}
-
-	// add valid unit test for the deposit method in the BankingSystem class
-	@Test
-	void testDepositValid() {
-		// create object for the BankingSystem class
-		BankingSystem bankingSystem = new BankingSystem();
-		// check the condition
-		assertEquals(bankingSystem.deposit(100), 100);
-	}
+@ExtendWith(MockitoExtension.class)
+public class BankingSystemTest {
 
 
-	// add invalid unit test for the deposit method in the BankingSystem class
+    @InjectMocks
+    private BankingSystem bankingSystem;
 
-	@Test
-	void testDepositInvalid() {
-		// create object for the BankingSystem class
-		BankingSystem bankingSystem = new BankingSystem();
-		// check the condition
-		assertEquals(bankingSystem.deposit(-100), 0);
-	}
+    @BeforeEach
+    void setUp(){
+        String account = "TestAccount";
+        bankingSystem.createAccount(account);
+    }
 
+    @Test
+    void deposit_성공(){
+        String account = "TestAccount";
+        double amount = 100;
+        double updatedAmount = bankingSystem.deposit(account, amount);
+        Assertions.assertEquals(100, updatedAmount);
+    }
+
+    @Test
+    void deposit_IllegalArgumentException(){
+        String account = "TestAccountException";
+        double amount = 100;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> bankingSystem.deposit(account, amount));
+    }
+
+    @Test
+    void deposit_(){
+        String account = "TestAccountException";
+        double amount = 100;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> bankingSystem.deposit(account, amount));
+    }
 }

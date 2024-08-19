@@ -1,62 +1,53 @@
 package com.example.spring_demo.service.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.Assertions;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import com.example.spring_demo.exception.CloudVendorNotFoundException;
 import com.example.spring_demo.model.CloudVendor;
 import com.example.spring_demo.repository.CloudVendorRepository;
 
-// service test
+import java.util.Optional;
+
 @ExtendWith(MockitoExtension.class)
-class CloudVendorServiceImplTest {
+public class CloudVendorServiceImplTest {
 
-	// create mock object for the CloudVendorServiceImplTest
-	@InjectMocks
-	CloudVendorServiceImpl cloudVendorServiceImpl;
+    @Mock
+    private CloudVendorRepository cloudVendorRepository;
 
-	// create mock object for the CloudVendorServiceImpl class
-	@Mock
-	CloudVendorRepository cloudVendorRepository;
+    @InjectMocks
+    private CloudVendorServiceImpl cloudVendorServiceImpl;
 
-	// add unit test for the createCloudVendor Method
-	@Test
-	void testCreateCloudVendor() {
-		// create object using a Builder for the CloudVendor
-		CloudVendor cloudVendor = CloudVendor.builder().vendorId("1").vendorName("AWS").vendorAddress("USA")
-			.vendorPhoneNumber("1234567890").build();
-		// check the condition
-		assertEquals(cloudVendorServiceImpl.createCloudVendor(cloudVendor), "Success");
-	}
+    @Test
+    void shouldReturnCloudVendorWhenExists() {
+        String testCloudVendorId = "testId";
+        CloudVendor testCloudVendor = new CloudVendor();
+        testCloudVendor.setVendorId(testCloudVendorId);
 
-	// Write test code to verify the input and return value of the getByVendorName method
-	@Test
-	void testGetByVendorName2() {
-		// create object using a Builder for the CloudVendor
-		CloudVendor cloudVendor = CloudVendor.builder().vendorId("1").vendorName("AWS").vendorAddress("USA")
-			.vendorPhoneNumber("1234567890").build();
-		// mock the findByVendorName method
-		when(cloudVendorRepository.findByVendorName("AWS")).thenReturn(java.util.Arrays.asList(cloudVendor));
-		// check the condition
-		assertEquals(cloudVendorServiceImpl.getByVendorName("AWS"), "Success");
-	}
+        // Set the behaviour for the Cloud Vendor Repository Mock
+        Mockito.when(cloudVendorRepository.findById(testCloudVendorId)).thenReturn(Optional.of(testCloudVendor));
 
+        // Call the method to test
+        CloudVendor retrievedCloudVendor = cloudVendorServiceImpl.getCloudVendor(testCloudVendorId);
 
-	// Write test code to validate the getByVendorName method
-	@Test
-	void testGetByVendorName() {
-		// create object using a Builder for the CloudVendor
-		CloudVendor cloudVendor = CloudVendor.builder().vendorId("1").vendorName("AWS").vendorAddress("USA")
-			.vendorPhoneNumber("1234567890").build();
-		// mock the findByVendorName method
-		when(cloudVendorRepository.findByVendorName("AWS")).thenReturn(java.util.Arrays.asList(cloudVendor));
-		// check the condition
-		assertEquals(cloudVendorServiceImpl.getByVendorName("AWS"), "Success");
-	}
+        // Validate the result
+        Assertions.assertEquals(testCloudVendor, retrievedCloudVendor);
+    }
 
+    @Test
+    void shouldThrowExceptionWhenCloudVendorDoesNotExist() {
+        String testCloudVendorId = "doesNotExistId";
+
+        // Set the behaviour for the Cloud Vendor Repository Mock
+        Mockito.when(cloudVendorRepository.findById(testCloudVendorId)).thenReturn(Optional.empty());
+
+        // Call the method to test and validate that the CloudVendorNotFoundException is thrown
+        Assertions.assertThrows(CloudVendorNotFoundException.class, () -> cloudVendorServiceImpl.getCloudVendor(testCloudVendorId));
+    }
 }

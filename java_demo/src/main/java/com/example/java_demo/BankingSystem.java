@@ -12,7 +12,7 @@ public class BankingSystem {
 		String accountNumber = generateAccountNumber();
 		Account account = new Account();
 		accounts.put(accountNumber, account);
-		return accountNumber;
+		return accountHolderName;
 	}
 
 	public double deposit(String accountNumber, double amount) {
