@@ -3,6 +3,14 @@ package com.example.java_demo;
 public class Payroll {
 
     // add method for validating employee phone number
+
+    /**
+     * Validate the phone number of the employee
+     * The phone number should be 10 digits and should not contain any characters
+     *
+     * @param employee
+     * @return boolean
+     */
     public boolean validatePhoneNumber(Employee employee) {
         String phoneNumber = employee.getPhoneNumber();
         if (phoneNumber.matches("\\d{10}")) return true;
